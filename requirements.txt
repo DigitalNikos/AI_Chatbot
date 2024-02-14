@@ -8,3 +8,5 @@ sentence_transformers
 autotrain-advanced 
 faiss-gpu
 streamlit
+PyMuPDF 
+python-docx

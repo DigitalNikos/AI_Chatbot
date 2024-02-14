@@ -1,6 +1,9 @@
 import streamlit as st
 import logging
+
 from loadLlama import generator
+from validation import validate_file
+from uploader import add_file_to_db
 
 logging.basicConfig(filename='app.log', level=logging.INFO)
 
@@ -17,5 +20,11 @@ with st.sidebar:
     st_document = st.sidebar.file_uploader("Upload a File")
     st.markdown('📖 Learn how to build this app in this [blog](https://blog.streamlit.io/how-to-build-a-llama-2-chatbot/)!')
 
+    validation_result, file_ext = validate_file(st, st_document)
 
+    if validation_result:
+            logging.info(f"Upload file is valid.")
+            add_file_to_db(st,st_document, file_ext)
+        
+        
 
