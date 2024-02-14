@@ -3,7 +3,7 @@ import fitz  # PyMuPDF
 import io
 
 from docx import Document
-from database import db
+from database import collection
 from embedding import embedding_model
 from langchain.text_splitter import CharacterTextSplitter
 
@@ -60,5 +60,4 @@ def add_file_to_db(st,st_document, file_ext):
     
     logging.info(f"Docs value: {docs}")
     
-    db.from_texts(docs, embedding_model)
     logging.info(f"Add docs successfull to DB")

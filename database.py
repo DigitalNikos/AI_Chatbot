@@ -1,9 +1,12 @@
 import logging
+import chromadb
+from chromadb.config import Settings
 
-from langchain.vectorstores import FAISS
 
 logging.basicConfig(filename='database.log', level=logging.INFO)
 
-vector_dim = 384 # Dimension for sentence-transformers/all-MiniLM-L6-v2 model
-db = FAISS(vector_dim=vector_dim)
+client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet", persist_directory="db/"))
+collection = client.create_collection(name="documents")
+
+
 logging.info(f"Initialize Database")

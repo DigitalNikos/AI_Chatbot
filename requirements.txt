@@ -6,7 +6,7 @@ xformers
 langchain 
 sentence_transformers 
 autotrain-advanced 
-faiss-gpu
+chromadb
 streamlit
 PyMuPDF 
 python-docx
