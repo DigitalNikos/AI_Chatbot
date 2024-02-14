@@ -1,0 +1,9 @@
+transformers
+datasets 
+accelerate 
+bitsandbytes 
+xformers 
+langchain 
+sentence_transformers 
+autotrain-advanced 
+faiss-gpu
