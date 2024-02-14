@@ -5,7 +5,7 @@ from loadLlama import generator
 from validation import validate_file
 from uploader import add_file_to_db
 
-logging.basicConfig(filename='app.log', level=logging.INFO)
+logging.basicConfig(filename='chatbot.log', level=logging.INFO)
 
 # App title
 st.set_page_config(page_title="🦙💬 AI Chatbot")
