@@ -12,14 +12,13 @@ bnb_config = transformers.BitsAndBytesConfig(
 )
 
 # Llama 2 Tokenizer
-tokenizer = transformers.AutoTokenizer.from_pretrained(model_id)
+tokenizer = transformers.AutoTokenizer.from_pretrained(model_id, device_map="cuda:0")
 
 # Llama 2 Model
 model = transformers.AutoModelForCausalLM.from_pretrained(
     model_id,
     trust_remote_code=True,
     quantization_config=bnb_config,
-    device_map='auto',
 )
 model.eval()
 

@@ -36,29 +36,29 @@ def extract_text_docx(file_content):
     logging.info(f"DOCX content: {text}")    
     return text
 
-def add_file_to_db(st,st_document, file_ext, doc_title):
+def add_file_to_db(st, st_document, file_ext, doc_title):
     logging.info(f"add_file_to_db()")
 
     # Convert the uploaded file to a bytes stream
     file_content = io.BytesIO(st_document.getvalue())
     
     if file_ext == '.pdf':
-        logging.info(f"File type: .pdf")
+        logging.info(f"File type: .pdf") 
         text = extract_text_pdf(file_content)
-        docs = text_splitter.split_documents(text)
+        docs = text_splitter.create_documents(text)
     elif file_ext == '.txt':
         logging.info(f"File type: .txt")
         text = extract_text_txt(file_content)
-        docs = text_splitter.split_documents(text)
+        docs = text_splitter.create_documents(text)
     elif file_ext == '.docx':
         logging.info(f"File type: .docx")
         text = extract_text_docx(file_content)
-        docs = text_splitter.split_documents(text)
+        docs = text_splitter.create_documents(text)
     else:
         st.error("Unsupported file type.")
         return
     
-    docs_embeddings = embedding_model(docs)
+    docs_embeddings = embedding_model.embed_documents(docs)
     logging.info(f"docs_embeddings: {docs_embeddings}")
     ids = [str(i) for i in range(len(docs))]
     logging.info(f"Ids: {ids}")
@@ -68,7 +68,6 @@ def add_file_to_db(st,st_document, file_ext, doc_title):
         metadatas = [{"source": doc_title}],
         ids = [ids]
     )
-    
+
     logging.info(f"Docs value: {docs}")
-    
     logging.info(f"Add docs successfull to DB")
