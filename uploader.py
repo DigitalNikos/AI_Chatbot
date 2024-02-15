@@ -36,7 +36,7 @@ def extract_text_docx(file_content):
     logging.info(f"DOCX content: {text}")    
     return text
 
-def add_file_to_db(st,st_document, file_ext):
+def add_file_to_db(st,st_document, file_ext, doc_title):
     logging.info(f"add_file_to_db()")
 
     # Convert the uploaded file to a bytes stream
@@ -57,6 +57,17 @@ def add_file_to_db(st,st_document, file_ext):
     else:
         st.error("Unsupported file type.")
         return
+    
+    docs_embeddings = embedding_model(docs)
+    logging.info(f"docs_embeddings: {docs_embeddings}")
+    ids = [str(i) for i in range(len(docs))]
+    logging.info(f"Ids: {ids}")
+    collection.add(
+        embeddings = docs_embeddings,
+        documents = docs,
+        metadatas = [{"source": doc_title}],
+        ids = [ids]
+    )
     
     logging.info(f"Docs value: {docs}")
     

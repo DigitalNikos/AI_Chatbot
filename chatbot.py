@@ -20,11 +20,11 @@ with st.sidebar:
     st_document = st.sidebar.file_uploader("Upload a File")
     st.markdown('📖 Learn how to build this app in this [blog](https://blog.streamlit.io/how-to-build-a-llama-2-chatbot/)!')
 
-    validation_result, file_ext = validate_file(st, st_document)
+    validation_result, file_ext, doc_title = validate_file(st, st_document)
 
     if validation_result:
             logging.info(f"Upload file is valid.")
-            add_file_to_db(st,st_document, file_ext)
+            add_file_to_db(st,st_document, file_ext, doc_title)
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():

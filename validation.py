@@ -16,10 +16,10 @@ def validate_file(st, uploaded_file):
 
         if ext in ['.pdf', '.docx', '.txt']:
             st.sidebar.success("File format is supported!")
-            return True, ext
+            return True, ext, uploaded_file.name
         else:
             st.sidebar.error("File format not supported. Please upload a PDF, DOCX, or TXT file.")
-            return False, ext
+            return False, ext, uploaded_file.name
     else:
         st.sidebar.write("Please upload a file.")
-        return False, None
+        return False, None, None
